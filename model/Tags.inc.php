@@ -209,6 +209,9 @@ class Zotero_Tags extends Zotero_ClassicDataObjects {
 				$sql .= "GROUP BY tags.tagID ORDER BY COUNT(tags.tagID)";
 			}
 			else {
+				if (!preg_match('/^[a-zA-Z0-9_]+$/', $order)) {
+					throw new \Exception('Invalid input');
+				}
 				$sql .= "ORDER BY $order ";
 			}
 			if (!empty($params['direction'])) {
